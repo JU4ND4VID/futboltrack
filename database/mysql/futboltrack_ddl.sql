@@ -201,7 +201,18 @@ CREATE TABLE IF NOT EXISTS `asistencia` (
 ENGINE = InnoDB
 COMMENT = 'Entidad asociativa que registra la asistencia de cada jugador \na cada sesión de entrenamiento. Implementa la relación N:M \nentre JUGADOR y ENTRENAMIENTO. Su clave primaria compuesta \ngarantiza que no se dupliquen registros de asistencia para \nel mismo jugador en la misma sesión.';
 
-
+-- -----------------------------------------------------
+-- Table `log entrenamiento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS log_entrenamiento (
+    id_log           INT NOT NULL AUTO_INCREMENT,
+    id_entrenamiento INT NOT NULL,
+    estado_anterior  VARCHAR(20) NOT NULL,
+    estado_nuevo     VARCHAR(20) NOT NULL,
+    fecha_cambio     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario_db       VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_log)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Tabla de auditoria para cambios de estado en entrenamientos.';
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
