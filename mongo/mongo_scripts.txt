@@ -1,0 +1,288 @@
+// ============================================================
+//  SCRIPT MONGODB - BASE DE DATOS: entrenamiento_futbol
+//  Colecciones: planes_sesion | observaciones_sesion | estadisticas_jugador
+// ============================================================
+
+// 1. SELECCIONAR / CREAR LA BASE DE DATOS
+use entrenamiento_futbol;
+
+// ============================================================
+// 2. CREAR LAS COLECCIONES EXPLICITAMENTE
+// ============================================================
+
+db.createCollection("planes_sesion");
+db.createCollection("observaciones_sesion");
+db.createCollection("estadisticas_jugador");
+
+// ============================================================
+// 3. INSERTAR DOCUMENTOS EN planes_sesion
+// ============================================================
+
+db.planes_sesion.insertMany([
+  {
+    "_id"                   : ObjectId("69ff8457c12f18e5329df8a3"),
+    "schema_version"        : 1,
+    "id_entrenamiento"      : 1,
+    "snapshot_entrenamiento": {
+      "fecha"       : "2026-05-08",
+      "hora_inicio" : "08:00",
+      "hora_fin"    : "10:00",
+      "tipo"        : "tecnico",
+      "categoria"   : "Sub-15",
+      "lugar"       : "Cancha Principal El Bosque"
+    },
+    "calentamiento": "Trote suave perimetral, movilidad articular y estiramientos dinamicos (15 min)",
+    "bloques": [
+      {
+        "nombre"       : "Conduccion y control",
+        "duracion_min" : 30,
+        "ejercicios"   : ["Pase y recepcion en parejas"]
+      },
+      {
+        "nombre"       : "Fuerza tren inferior",
+        "duracion_min" : 15,
+        "ejercicios"   : ["Sentadillas", "Zancadas"]
+      },
+      {
+        "nombre"       : "Partido reducido 5v5",
+        "duracion_min" : 25,
+        "ejercicios"   : []
+      }
+    ],
+    "vuelta_calma": "Estiramientos estaticos y charla tecnica (10 min)",
+    "materiales"  : ["20 conos", "10 petos", "4 balones", "2 arcos portatiles"],
+    "creado_en"   : ISODate("2026-05-09T07:00:00Z"),
+    "snapchot_entrenamiento": {
+      "fecha": "2026-05-08"
+    }
+  },
+  {
+    "_id"                   : ObjectId("69ff8457c12f18e5329df8a4"),
+    "schema_version"        : 1,
+    "id_entrenamiento"      : 2,
+    "snapshot_entrenamiento": {
+      "fecha"       : "2026-05-11",
+      "hora_inicio" : "15:00",
+      "hora_fin"    : "17:00",
+      "tipo"        : "fisico",
+      "categoria"   : "Sub-17",
+      "lugar"       : "Cancha Auxiliar Norte"
+    },
+    "calentamiento": {
+      "duracion_min" : 20,
+      "descripcion"  : "Rondo 4v1, activacion muscular progresiva"
+    },
+    "bloques": [
+      {
+        "tipo"              : "fisico",
+        "nombre"            : "Resistencia aerobica",
+        "duracion_min"      : 30,
+        "series"            : 4,
+        "duracion_serie_min": 5,
+        "descripcion"       : "Intervalos al 80% FCM"
+      },
+      {
+        "tipo"        : "tactico",
+        "nombre"      : "Presion colectiva",
+        "duracion_min": 25,
+        "sistema"     : "4-3-3",
+        "descripcion" : "Trabajo de lineas tras perdida"
+      }
+    ],
+    "vuelta_calma": {
+      "duracion_min": 10,
+      "descripcion" : "Foam roller y estiramientos de isquiotibiales"
+    },
+    "materiales": ["15 conos", "8 petos", "3 balones", "pizarra tactica"],
+    "creado_en" : ISODate("2026-05-11T14:00:00Z")
+  }
+]);
+
+// ============================================================
+// 4. INSERTAR DOCUMENTOS EN observaciones_sesion
+// ============================================================
+
+db.observaciones_sesion.insertMany([
+  {
+    "_id"                   : ObjectId("69ff84e7c12f18e5329df8a7"),
+    "schema_version"        : 1,
+    "id_entrenamiento"      : 1,
+    "snapshot_entrenamiento": {
+      "fecha"      : "2026-05-10",
+      "tipo"       : "tecnico",
+      "categoria"  : "Sub-15",
+      "entrenador" : "Carlos Herrera"
+    },
+    "observacion_general"  : "Buena disposicion del grupo. Mejora en control orientado.",
+    "aspectos_positivos"   : [
+      "Alta intensidad en conduccion",
+      "Buena actitud competitiva",
+      "Buena vision de juego"
+    ],
+    "aspectos_a_mejorar"   : [
+      "Comunicacion verbal",
+      "Posicionamiento defensivo",
+      "Falta movimiento de pelota"
+    ],
+    "jugadores_destacados" : ["1008100003", "1008100001"],
+    "estado_animo_grupo"   : "motivado",
+    "condiciones_clima"    : "frio",
+    "creado_en"            : ISODate("2026-05-10T10:45:00Z")
+  },
+  {
+    "_id"                   : ObjectId("69ff84e7c12f18e5329df8a8"),
+    "schema_version"        : 1,
+    "id_entrenamiento"      : 2,
+    "snapshot_entrenamiento": {
+      "fecha"      : "2026-05-12",
+      "tipo"       : "fisico",
+      "categoria"  : "Sub-17",
+      "entrenador" : "Monica Ruiz"
+    },
+    "observacion_general"  : "Sesion exigente. El grupo respondio bien a los intervalos.",
+    "aspectos_positivos"   : [
+      "Disciplina tactica en presion colectiva",
+      "Buena recuperacion entre series"
+    ],
+    "aspectos_a_mejorar"   : [
+      "Resistencia en ultimos 20 min",
+      "Velocidad de reaccion en coberturas"
+    ],
+    "jugadores_destacados" : ["1006748391", "1006748394"],
+    "estado_animo_grupo"   : "concentrado",
+    "condiciones_clima"    : "nublado",
+    "creado_en"            : ISODate("2026-05-12T17:30:00Z")
+  }
+]);
+
+// ============================================================
+// 5. INSERTAR DOCUMENTOS EN estadisticas_jugador
+// ============================================================
+
+db.estadisticas_jugador.insertMany([
+  {
+    "_id"                  : ObjectId("69ff84a7c12f18e5329df8a5"),
+    "schema_version"       : 1,
+    "id_entrenamiento"     : 1,
+    "id_entrenamiento_mysql": 1,
+    "fecha"                : "2026-05-10",
+    "categoria"            : "Sub-15",
+    "count"                : 5,
+    "jugadores": [
+      {
+        "identificacion_jugador": "1008100001",
+        "nombre"                : "",
+        "distancia_km"          : 7,
+        "sprints"               : 15,
+        "nota"                  : 7
+      },
+      {
+        "identificacion_jugador": "1008100002",
+        "nombre"                : "",
+        "distancia_km"          : 6.8,
+        "sprints"               : 12,
+        "nota"                  : 7
+      },
+      {
+        "identificacion_jugador": "1008100003",
+        "nombre"                : "",
+        "distancia_km"          : 7.5,
+        "sprints"               : 18,
+        "nota"                  : 9
+      },
+      {
+        "identificacion_jugador": "1008100004",
+        "nombre"                : "",
+        "distancia_km"          : 6.1,
+        "sprints"               : 10,
+        "nota"                  : 6
+      },
+      {
+        "identificacion_jugador": "1008100005",
+        "nombre"                : "",
+        "distancia_km"          : 7,
+        "sprints"               : 18,
+        "nota"                  : 9
+      }
+    ],
+    "resumen_computado": {
+      "promedio_nota_sesion"       : 7.6,
+      "total_distancia_equipo_km"  : 34.6,
+      "promedio_sprints"           : 13.8,
+      "jugador_destacado"          : "1008100003",
+      "jugadores_bajo_rendimiento" : ["1008100004"]
+    },
+    "creado_en": ISODate("2026-05-10T10:30:00Z")
+  },
+  {
+    "_id"             : ObjectId("69ff84a7c12f18e5329df8a6"),
+    "schema_version"  : 1,
+    "id_entrenamiento": 2,
+    "fecha"           : "2026-05-12",
+    "categoria"       : "Sub-17",
+    "count"           : 5,
+    "jugadores": [
+      {
+        "identificacion_jugador": "1006748391",
+        "nombre"                : "Carlos Perez",
+        "distancia_km"          : 9.1,
+        "sprints"               : 22,
+        "pases_completados"     : 45,
+        "nota"                  : 9
+      },
+      {
+        "identificacion_jugador": "1006748392",
+        "nombre"                : "Andres Moreno",
+        "distancia_km"          : 8.4,
+        "sprints"               : 19,
+        "pases_completados"     : 38,
+        "nota"                  : 8
+      },
+      {
+        "identificacion_jugador": "1006748393",
+        "nombre"                : "Felipe Gutierrez",
+        "distancia_km"          : 7.9,
+        "sprints"               : 16,
+        "pases_completados"     : 31,
+        "nota"                  : 7
+      },
+      {
+        "identificacion_jugador": "1006748394",
+        "nombre"                : "Santiago Reyes",
+        "distancia_km"          : 8.7,
+        "sprints"               : 20,
+        "pases_completados"     : 42,
+        "nota"                  : 8
+      },
+      {
+        "identificacion_jugador": "1006748395",
+        "nombre"                : "Nicolas Castro",
+        "distancia_km"          : 6.5,
+        "sprints"               : 11,
+        "pases_completados"     : 24,
+        "nota"                  : 6
+      }
+    ],
+    "resumen_computado": {
+      "promedio_nota_sesion"       : 7.6,
+      "total_distancia_equipo_km"  : 40.6,
+      "promedio_sprints"           : 17.6,
+      "jugador_destacado"          : "1006748391",
+      "jugadores_bajo_rendimiento" : ["1006748395"]
+    },
+    "creado_en": ISODate("2026-05-12T17:15:00Z")
+  }
+]);
+
+// ============================================================
+// 6. VERIFICACION - CONSULTAR LAS TRES COLECCIONES
+// ============================================================
+
+print("=== planes_sesion ===");
+db.planes_sesion.find().pretty();
+
+print("=== observaciones_sesion ===");
+db.observaciones_sesion.find().pretty();
+
+print("=== estadisticas_jugador ===");
+db.estadisticas_jugador.find().pretty();
