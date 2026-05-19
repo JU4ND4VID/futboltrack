@@ -1,0 +1,39 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary:     #1A3C6E;
+  --color-accent:      #2E6BAD;
+  --color-accent-light:#D6E4F0;
+  --color-bg:          #F4F6F9;
+  --color-sidebar:     #1A3C6E;
+  --color-white:       #FFFFFF;
+  --color-text:        #2C2C2C;
+  --color-text-light:  #6B7280;
+  --color-border:      #D1D5DB;
+  --color-success:     #16A34A;
+  --color-warning:     #D97706;
+  --color-danger:      #DC2626;
+  --font-main:         'Segoe UI', sans-serif;
+  --radius:            8px;
+  --shadow:            0 2px 8px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-size: 15px;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-main);
+}
+
+input, select, textarea {
+  font-family: var(--font-main);
+}
